@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Propuesta web · Sebastián Irigaray S.L.</title>
+<meta name="description" content="Propuesta de web nueva para Sebastián Irigaray S.L. (Alaquàs): la demo funcionando, qué lleva y qué cambia respecto a la web actual.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Propuesta de web nueva para Sebastián Irigaray S.L.">
+<meta property="og:description" content="Una web tan precisa como vuestras piezas. La demo funcionando y todo lo que cambia.">
+<meta property="og:image" content="img/funciones/hero.webp">
+<meta name="theme-color" content="#16191B">
+<link rel="icon" href="img/marca.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F4F2EC;--paper-2:#EAE7DE;--white:#fff;--ink:#16191B;--ink-2:#3A4046;--muted:#5F666C;--line:#D3CFC4;--line-2:#BFBAAD;--red:#C81E24;--red-d:#A3171C;--red-l:#FF5A5F;--cyan:#4FD6E8;
+  --sans:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;--serif:"Instrument Serif",Georgia,serif;--mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;--ease:cubic-bezier(.22,1,.36,1)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px;overflow-x:clip}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;overflow-x:clip}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+.wrap{width:min(1140px,100% - 32px);margin-inline:auto}
+:focus-visible{outline:2.5px solid var(--red);outline-offset:3px;border-radius:4px}
+em{font-family:var(--serif);font-style:italic;font-weight:400;font-stretch:100%;text-transform:none;letter-spacing:0}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:48px;padding:.8em 1.35em;border-radius:4px;font:600 .98rem/1 var(--sans);text-decoration:none;white-space:nowrap;transition:background .2s,color .2s,transform .2s var(--ease)}
+.btn:active{transform:translateY(1px)}
+.btn.red{background:var(--red);color:#fff}.btn.red:hover{background:var(--red-d)}
+.btn.dark{background:var(--ink);color:#fff}.btn.dark:hover{background:#000}
+.btn.line{box-shadow:inset 0 0 0 1.5px var(--ink)}.btn.line:hover{background:var(--ink);color:#fff}
+.btn.light{color:#fff;box-shadow:inset 0 0 0 1.5px #fff}.btn.light:hover{background:#fff;color:var(--ink)}
+.btn.sm{min-height:40px;padding:.6em 1em;font-size:.9rem}
+
+/* barra */
+.bar{position:sticky;top:0;z-index:20;background:rgba(244,242,236,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:24px;height:64px}
+.bar .logo{display:flex;align-items:center;gap:10px;margin-right:auto;text-decoration:none;font-size:.88rem;font-weight:500;color:var(--muted)}
+.bar .logo img{width:34px}
+.bar nav{display:flex;gap:22px;font-size:.92rem;font-weight:500}
+.bar nav a{text-decoration:none;color:var(--ink-2)}.bar nav a:hover{color:var(--red)}
+
+/* portada */
+.hero{padding:72px 0 0;background-image:repeating-linear-gradient(0deg,transparent 0 31px,rgba(22,25,27,.045) 31px 32px),repeating-linear-gradient(90deg,transparent 0 31px,rgba(22,25,27,.045) 31px 32px)}
+.hero-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:48px;align-items:end}
+.hero-copy{padding-bottom:88px}
+.kicker{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);margin-bottom:20px}
+.kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red)}
+.hero h1{font-size:clamp(2.5rem,5.2vw,4.3rem);font-weight:800;font-stretch:78%;line-height:.96;letter-spacing:-.015em;text-transform:uppercase;text-wrap:balance}
+.hero h1 em{display:block;color:var(--red);font-size:1.08em;line-height:1}
+.intro{margin-top:22px;font-size:1.12rem;color:var(--ink-2);max-width:46ch}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero-shots{position:relative}
+.browser{border-radius:10px 10px 0 0;overflow:hidden;background:#fff;box-shadow:0 0 0 1px var(--line-2),0 30px 70px -30px rgba(22,25,27,.55)}
+.browser::before{content:"";display:block;height:26px;background-color:#E4E1D8;background-image:radial-gradient(circle at 15px 13px,#C9C4B8 4.5px,transparent 5.5px),radial-gradient(circle at 31px 13px,#C9C4B8 4.5px,transparent 5.5px),radial-gradient(circle at 47px 13px,#C9C4B8 4.5px,transparent 5.5px)}
+.browser.round{border-radius:10px}
+.phone{border-radius:34px;padding:9px;background:#0d0d0d;box-shadow:0 30px 60px -20px rgba(22,25,27,.6)}
+.phone img{border-radius:26px;aspect-ratio:390/844;object-fit:cover;object-position:top}
+.hero-shots .phone{position:absolute;left:-48px;bottom:-56px;width:min(190px,30%)}
+
+/* secciones */
+section{padding:80px 0}
+.label{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+h2{font-size:clamp(2rem,4.2vw,3.1rem);font-weight:800;font-stretch:80%;line-height:1;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:14px;text-wrap:balance}
+h2 em{color:var(--red);font-size:1.1em}
+.lead{max-width:60ch;color:var(--ink-2);font-size:1.07rem}
+
+/* demo en vivo */
+.live{background:var(--ink);color:#fff;padding-top:140px}
+.live .label{color:var(--cyan)}
+.live h2 em{color:var(--red-l)}
+.live .lead{color:rgba(255,255,255,.75)}
+.live-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:30px}
+.frame{border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.12),0 40px 80px -30px rgba(0,0,0,.8)}
+.frame-top{display:flex;align-items:center;gap:14px;height:40px;padding:0 14px;background:#2A3039}
+.frame-top i{width:11px;height:11px;border-radius:50%;background:#4A535E;box-shadow:17px 0 0 #4A535E,34px 0 0 #4A535E;margin-right:40px}
+.frame-top span{flex:1;max-width:440px;background:#1E232A;border-radius:6px;padding:4px 12px;font-family:var(--mono);font-size:.76rem;color:#AEB8C1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.frame iframe{display:block;width:100%;height:min(780px,80vh);border:0;background:var(--paper)}
+.live-mobile{display:none}
+.hint{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:20px;font-size:.92rem;color:rgba(255,255,255,.75)}
+.hint b{color:var(--cyan);font-weight:500;font-family:var(--mono);font-size:.84rem}
+
+/* recorrido */
+.tour{display:grid;gap:76px;margin-top:48px}
+.feat{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
+.feat:nth-child(even){grid-template-columns:1fr 1.25fr}
+.feat:nth-child(even) .feat-pic{order:2}
+.feat-pic .narrow{max-width:520px;margin-inline:auto}
+.feat-pic .dark-pic{border-radius:10px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(22,25,27,.6)}
+.feat-num{font-family:var(--mono);font-size:.85rem;color:var(--red);padding-top:.6em;border-top:1.5px solid var(--red);display:inline-block;min-width:64px;margin-bottom:16px}
+.feat h3{font-size:clamp(1.5rem,2.8vw,2.1rem);font-weight:800;font-stretch:82%;line-height:1.02;text-transform:uppercase;margin-bottom:14px}
+.feat p{color:var(--ink-2);font-size:1.04rem}
+.feat ul{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:9px}
+.feat li{position:relative;padding-left:26px;font-size:.98rem}
+.feat li::before{content:"";position:absolute;left:0;top:.62em;width:14px;height:1.5px;background:var(--red)}
+.feat li::after{content:"";position:absolute;left:11px;top:calc(.62em - 3px);width:1.5px;height:7.5px;background:var(--red)}
+
+.extras{display:grid;grid-template-columns:repeat(3,1fr);margin-top:76px;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.extra{background:#fff;padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.extra h4{margin:0 0 6px;font-size:1.02rem}
+.extra p{font-size:.94rem;color:var(--ink-2)}
+
+/* antes/después */
+.compare{background:#fff;border-block:1px solid var(--line)}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:44px}
+.shot{margin:0}
+.tag{display:inline-block;font-family:var(--mono);font-size:.76rem;text-transform:uppercase;letter-spacing:.05em;padding:.4em .8em;border-radius:3px;margin-bottom:16px}
+.before .tag{background:var(--paper-2);color:var(--muted)}
+.after .tag{background:var(--ink);color:#fff}
+.shot .phone{max-width:280px}
+.shot figcaption{margin-top:18px;max-width:46ch;color:var(--ink-2)}
+.shot figcaption b{color:var(--ink)}
+.vs.desk{margin-top:56px}
+
+/* números */
+.numbers{background:var(--ink);color:#fff}
+.numbers .label{color:var(--cyan)}
+.numbers h2 em{color:var(--red-l)}
+.numbers .lead{color:rgba(255,255,255,.75)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:40px;border-top:1px solid rgba(255,255,255,.2)}
+.stat{padding:22px 22px 26px 0;border-right:1px solid rgba(255,255,255,.12)}
+.stat+.stat{padding-left:22px}.stat:last-child{border-right:0}
+.stat .k{font-size:.88rem;color:rgba(255,255,255,.72);min-height:2.8em}
+.stat .v{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-top:14px}
+.stat .old{font-family:var(--mono);font-size:1.05rem;color:rgba(255,255,255,.45);text-decoration:line-through;text-decoration-thickness:1.5px;white-space:nowrap}
+.stat .new{font-size:2.5rem;font-weight:800;font-stretch:75%;line-height:1;color:#fff}
+.stat .u{font-family:var(--mono);font-size:.8rem;color:var(--cyan)}
+.fine{margin-top:20px;font-size:.82rem;color:rgba(255,255,255,.55);max-width:82ch}
+
+/* punto por punto */
+.list{display:grid;margin-top:40px;counter-reset:n;border-top:1px solid var(--ink)}
+.item{counter-increment:n;display:grid;grid-template-columns:64px 1fr 1fr;gap:8px 28px;align-items:start;padding:24px 0;border-bottom:1px solid var(--line)}
+.item::before{content:counter(n,decimal-leading-zero);grid-row:1/3;font-family:var(--mono);font-size:.9rem;color:var(--red);padding-top:.2em}
+.item h3{grid-column:2/-1;font-size:1.12rem;font-weight:700}
+.item .now{grid-column:2;color:var(--muted);font-size:.97rem}
+.item .then{grid-column:3;font-size:.97rem}
+.item small{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.item .now small{color:var(--muted)}.item .then small{color:var(--red)}
+
+/* siguiente paso */
+.next{background:var(--paper-2);border-top:1px solid var(--line)}
+.todo{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:30px;padding:0;list-style:none}
+.todo li{background:#fff;border:1px solid var(--line);padding:20px 22px;color:var(--ink-2)}
+.todo b{display:block;margin-bottom:4px;color:var(--ink)}
+.close{margin-top:44px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;background:var(--ink);color:#fff;border-radius:6px;padding:32px 34px}
+.close h3{font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:800;font-stretch:80%;text-transform:uppercase}
+.close h3 em{color:var(--red-l)}
+.close p{margin-top:8px;color:rgba(255,255,255,.8);max-width:58ch}
+.close .acts{display:flex;flex-wrap:wrap;gap:10px}
+
+.foot{padding:28px 0 44px;font-size:.85rem;color:var(--muted)}
+.foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  html{scroll-padding-top:112px}
+  .bar .wrap{flex-wrap:wrap;height:auto;padding-top:10px;gap:10px 16px}
+  .bar nav{order:5;display:flex;gap:6px;width:calc(100% + 32px);margin:0 -16px;padding:0 16px 10px;overflow-x:auto;scrollbar-width:none;font-size:.86rem}
+  .bar nav::-webkit-scrollbar{display:none}
+  .bar nav a{flex:none;padding:6px 13px;border:1px solid var(--line-2);border-radius:999px;white-space:nowrap}
+  .hero{padding-top:48px}
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .hero-copy{padding-bottom:0}
+  .hero-shots .phone{display:none}
+  .live{padding-top:88px}
+  .live .frame,.hint{display:none}
+  .live-mobile{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+  .live-mobile .phone{width:150px}
+  .feat,.feat:nth-child(even){grid-template-columns:1fr;gap:28px}
+  .feat:nth-child(even) .feat-pic{order:0}
+  .tour{gap:52px;margin-top:32px}
+  .feat,.feat:nth-child(even){gap:20px}
+  .extras{grid-template-columns:1fr 1fr;margin-top:52px}
+  .extra{padding:18px}
+  .vs{grid-template-columns:1fr;gap:36px;margin-top:28px}
+  .vs.phones{grid-template-columns:1fr 1fr;gap:16px}
+  .vs.phones .phone{border-radius:24px;padding:6px}
+  .vs.phones .phone img{border-radius:19px}
+  .vs.phones figcaption{font-size:.84rem;margin-top:12px}
+  .vs.desk{margin-top:40px}
+  .live-head{margin-bottom:20px}
+  .list{margin-top:24px}
+  .item{padding:18px 0}
+  .todo{margin-top:20px}
+  .close{margin-top:28px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{padding:20px 14px 22px 0!important}
+  .stat:nth-child(2n){padding-left:16px!important;border-right:0}
+  .stat:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.12)}
+  .item{grid-template-columns:44px 1fr}
+  .item .now,.item .then{grid-column:2}
+  .item::before{grid-row:1}
+  .todo{grid-template-columns:1fr}
+  .close{grid-template-columns:1fr}
+  section{padding:52px 0}
+  .live{padding-top:72px}
+  .hero-copy{padding-bottom:0}
+}
+@media (max-width:520px){
+  body{font-size:16px}
+  .extras{grid-template-columns:1fr}
+  .bar .logo{font-size:0;gap:0}
+  .stat .new{font-size:2rem}
+  .live-mobile{grid-template-columns:1fr}
+  .live-mobile .phone{width:180px}
+  .close{padding:26px 22px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .rv{opacity:1;transform:none;transition:none}}
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="img/marca.webp" alt="" width="160" height="144">Propuesta para Sebastián Irigaray S.L.</a>
+    <nav aria-label="Secciones">
+      <a href="#demo">La demo</a>
+      <a href="#lleva">Qué lleva</a>
+      <a href="#antes">Antes y después</a>
+      <a href="#cambios">Qué cambia</a>
+    </nav>
+    <a class="btn dark sm" href="demo/">Abrir la demo</a>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="kicker">Propuesta de web · Sebastián Irigaray S.L. · Alaquàs</p>
+      <h1>Una web tan precisa <em>como vuestras piezas.</em></h1>
+      <p class="intro">Lleváis desde 1982 fabricando piezas en serie, con tornos de levas de Ø16 a Ø80 mm y CNC de hasta 10 ejes. La web de ahora no deja pedir presupuesto ni llamar desde el móvil, y no dice qué cabe en vuestras máquinas. Os hemos preparado una nueva. Ya funciona: se puede abrir y probar todo.</p>
+      <div class="actions">
+        <a class="btn red" href="demo/">Abrir la demo</a>
+        <a class="btn line" href="#lleva">Ver qué lleva</a>
+      </div>
+    </div>
+    <div class="hero-shots">
+      <div class="browser"><img src="img/funciones/hero.webp" alt="Portada de la web nueva de Sebastián Irigaray en ordenador, con un plano de taller" width="1200" height="750"></div>
+      <div class="phone"><img src="img/antes-despues/new-mob.webp" alt="Portada de la web nueva en el móvil" width="390" height="844"></div>
+    </div>
+  </div>
+</section>
+
+<section class="live" id="demo">
+  <div class="wrap">
+    <div class="live-head">
+      <div>
+        <p class="label">Funcionando</p>
+        <h2>Probadla <em>aquí mismo</em></h2>
+        <p class="lead">No es un dibujo: es la web de verdad, con vuestros datos, vuestras fotos y vuestro logo. Bajad, comprobad un diámetro o pedid un presupuesto de prueba.</p>
+      </div>
+      <a class="btn red" href="demo/" target="_blank" rel="noopener">Abrirla en pantalla completa</a>
+    </div>
+
+    <div class="frame">
+      <div class="frame-top"><i></i><span>sebastianirigaray · web nueva</span></div>
+      <iframe src="demo/" title="Demo de la web nueva de Sebastián Irigaray S.L." loading="lazy"></iframe>
+    </div>
+    <p class="hint"><span><b>Prueba 1:</b> pasa el ratón por el plano de la portada</span><span><b>Prueba 2:</b> en «¿Cabe en nuestros tornos?», pon 38 mm y más de 10.000 piezas</span><span><b>Prueba 3:</b> pide un presupuesto adjuntando un PDF</span></p>
+
+    <div class="live-mobile">
+      <div class="phone"><img src="img/antes-despues/new-mob.webp" alt="La web nueva en el móvil" width="390" height="844" loading="lazy"></div>
+      <div>
+        <p class="lead">Desde el móvil se ve mejor abierta del todo: así la verán vuestros clientes.</p>
+        <p style="margin-top:18px"><a class="btn red" href="demo/">Abrir la demo</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="lleva">
+  <div class="wrap">
+    <p class="label">Recorrido</p>
+    <h2>Qué lleva <em>la web</em></h2>
+    <p class="lead">Todo sale de vuestra web actual y de lo que publicáis sobre la empresa. Lo que no estaba claro no se ha inventado: está en la lista del final para confirmarlo.</p>
+
+    <div class="tour">
+      <article class="feat rv">
+        <div class="feat-pic"><div class="narrow dark-pic"><img src="img/funciones/plano.webp" alt="Plano de taller en la portada, con el cursor en cruz sobre la vista lateral" width="603" height="477" loading="lazy"></div></div>
+        <div>
+          <p class="feat-num">01</p>
+          <h3>Un plano en la portada</h3>
+          <p>Vuestros clientes son ingenieros, jefes de compras y talleres. Hablan en planos, así que la web abre con uno: un casquillo roscado con su media sección, cotas, tolerancias y vuestro nombre en el cajetín.</p>
+          <ul>
+            <li>Se dibuja solo al abrir la página, capa a capa, como en la pantalla del CAD.</li>
+            <li>Al pasar el ratón sale el cursor en cruz y las coordenadas en milímetros.</li>
+            <li>Es un plano de ejemplo. Si nos dais uno real que se pueda enseñar, lo ponemos.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="feat rv">
+        <div class="feat-pic"><div class="browser round"><img src="img/funciones/cabe.webp" alt="Comprobador de diámetro: 38 mm y más de 10.000 piezas encajan en el torno de levas de 42 mm" width="1181" height="419" loading="lazy"></div></div>
+        <div>
+          <p class="feat-num">02</p>
+          <h3>¿Cabe en nuestros tornos?</h3>
+          <p>La pregunta que os hacen siempre por teléfono, contestada en la web. El cliente pone el diámetro de la barra y cuántas piezas necesita, y ve qué máquina encaja.</p>
+          <ul>
+            <li>Usa vuestras capacidades de levas: Ø16, 26, 36, 42, 60 y 80 mm.</li>
+            <li>Series cortas, al CNC. Más de Ø80, a estudiar con el plano.</li>
+            <li>Un botón pasa esos datos al formulario de presupuesto.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="feat rv">
+        <div class="feat-pic"><div class="browser round"><img src="img/funciones/presupuesto.webp" alt="Petición de presupuesto de ejemplo con el plano adjunto y el resumen de datos" width="1130" height="584" loading="lazy"></div></div>
+        <div>
+          <p class="feat-num">03</p>
+          <h3>Presupuesto con el plano adjunto</h3>
+          <p>Hoy la web no tiene formulario: quien quiere precio tiene que buscar el correo en el pie. En la nueva, la petición llega completa y con el plano.</p>
+          <ul>
+            <li>Material, diámetro, cantidad y el archivo: PDF, DXF, DWG, STEP o una foto.</li>
+            <li>Avisa si falta algo antes de enviar, para no tener que llamar a pedirlo.</li>
+            <li>En la demo no se envía nada. En la web publicada os llegaría al correo.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="feat rv">
+        <div class="feat-pic"><div class="browser round"><img src="img/funciones/materiales.webp" alt="Materiales con el filtro «Los soldamos» activado" width="1130" height="703" loading="lazy"></div></div>
+        <div>
+          <p class="feat-num">04</p>
+          <h3>Materiales, en una sola sección</h3>
+          <p>Ahora hay dos páginas «Materiales», una en Decoletaje y otra en Mecanizado, cada una con su lista. En la nueva están todos juntos, con los grados de acero que ya publicáis.</p>
+          <ul>
+            <li>Latón, aceros (F212, F114, ST52…), inox, aluminio, cobre, bronce, plásticos técnicos, celotex y material aeronáutico.</li>
+            <li>Un filtro separa lo que mecanizáis de lo que soldáis.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="feat rv">
+        <div class="feat-pic"><div class="browser round"><img src="img/funciones/piezas.webp" alt="Galería de piezas sobre fondo blanco, como un catálogo" width="1130" height="855" loading="lazy"></div></div>
+        <div>
+          <p class="feat-num">05</p>
+          <h3>Vuestras piezas, como en un catálogo</h3>
+          <p>Vuestras fotos de producto son buenas: piezas de latón y acero sobre blanco. En el carrusel actual se estiran y se pixelan. Aquí van a su tamaño, sobre blanco, con un pie corto en cada una.</p>
+        </div>
+      </article>
+
+      <article class="feat rv">
+        <div class="feat-pic"><div class="browser round"><img src="img/funciones/empresa.webp" alt="Historia de la empresa: 1982 en Aldaia, 1995 en Alaquàs y la renovación de maquinaria" width="1130" height="400" loading="lazy"></div></div>
+        <div>
+          <p class="feat-num">06</p>
+          <h3>Más de 40 años de viruta</h3>
+          <p>La historia que contáis en los directorios y no en vuestra web: 1982 en Aldaia, 1995 en Alaquàs con 1.200 m², y la renovación de maquinaria con ayudas de la Generalitat en 2024 y 2025.</p>
+          <ul>
+            <li>Los avisos de las ayudas siguen en el pie, porque la subvención obliga a publicarlos.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <div class="extras">
+      <div class="extra rv"><h4>Pensada para el móvil</h4><p>Al bajar aparece una barra fija con «Llamar» y «Pedir presupuesto». El teléfono se pulsa y llama.</p></div>
+      <div class="extra rv"><h4>Cómo llegar</h4><p>Mapa de C/ Tapissers en Els Mollons y un botón que abre la ruta en Google Maps.</p></div>
+      <div class="extra rv"><h4>Ligera</h4><p>16 archivos en vez de 51. Abre rápido aunque el comercial la mire en la nave con poca cobertura.</p></div>
+      <div class="extra rv"><h4>Vuestro logo y colores</h4><p>Vuestro rojo, la tinta negra y la espiral del logo, sin el recuadro de fondo que lleva ahora.</p></div>
+      <div class="extra rv"><h4>Se puede ampliar</h4><p>La web actual bloquea el zoom en el móvil. En la nueva se puede ampliar una cota o un dato.</p></div>
+      <div class="extra rv"><h4>Fuera de Google, de momento</h4><p>La demo está oculta para los buscadores, así nadie la confunde con la web oficial hasta que la publiquéis.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="compare" id="antes">
+  <div class="wrap">
+    <p class="label">Antes y después</p>
+    <h2>Lo primero que ve <em>un cliente</em></h2>
+    <p class="lead">Mucha gente os encuentra desde el móvil, buscando un taller de decoletaje cerca. Esta es la primera pantalla, sin tocar nada.</p>
+    <div class="vs phones">
+      <figure class="shot before rv">
+        <span class="tag">Ahora</span>
+        <div class="phone"><img src="img/antes-despues/old-mob.webp" alt="Web actual en el móvil: el texto del carrusel tapa la foto" width="390" height="844" loading="lazy"></div>
+        <figcaption><b>El texto del carrusel tapa la foto</b> y debajo hay una frase genérica sobre fondo azul. No se ve qué fabricáis, con qué máquinas ni cómo pedir precio.</figcaption>
+      </figure>
+      <figure class="shot after rv">
+        <span class="tag">Propuesta</span>
+        <div class="phone"><img src="img/antes-despues/new-mob.webp" alt="Web nueva en el móvil" width="390" height="844" loading="lazy"></div>
+        <figcaption><b>Qué hacéis, desde 1982 y dónde,</b> con «Enviar un plano» a mano y el plano de taller justo debajo.</figcaption>
+      </figure>
+    </div>
+    <div class="vs desk">
+      <figure class="shot before rv">
+        <span class="tag">Ahora</span>
+        <div class="browser round"><img src="img/antes-despues/old-desk.webp" alt="Web actual en ordenador" width="1200" height="750" loading="lazy"></div>
+        <figcaption><b>Un carrusel que ocupa toda la pantalla,</b> con fotos ampliadas de más y el texto sobre una banda gris. El logo lleva un recuadro de fondo.</figcaption>
+      </figure>
+      <figure class="shot after rv">
+        <span class="tag">Propuesta</span>
+        <div class="browser round"><img src="img/funciones/hero.webp" alt="Web nueva en ordenador" width="1200" height="750" loading="lazy"></div>
+        <figcaption><b>Diseño hecho para vosotros:</b> vuestro logo limpio, vuestro rojo y un plano que dice a qué os dedicáis antes de leer nada.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="numbers">
+  <div class="wrap">
+    <p class="label">Medido, no estimado</p>
+    <h2>Más ligera <em>y más clara</em></h2>
+    <p class="lead">Abrimos la portada de las dos webs en el mismo navegador y contamos lo que descarga cada una.</p>
+    <div class="stats">
+      <div class="stat rv"><p class="k">Archivos que descarga la portada al abrirla</p><p class="v"><span class="old">51</span><span class="new">16</span></p></div>
+      <div class="stat rv"><p class="k">Peso total de la portada</p><p class="v"><span class="old">2,9 MB</span><span class="new">0,4</span><span class="u">MB</span></p></div>
+      <div class="stat rv"><p class="k">Formularios para pedir presupuesto</p><p class="v"><span class="old">0</span><span class="new">1</span><span class="u">con plano</span></p></div>
+      <div class="stat rv"><p class="k">Imágenes sin descripción para Google</p><p class="v"><span class="old">19 de 20</span><span class="new">0</span></p></div>
+    </div>
+    <p class="fine">Medición del 16/10/2026, primera carga de la portada en ordenador (Chromium, sin caché). La web actual carga 18 scripts y 9 hojas de estilo del tema de WordPress. No lleva programas de rastreo publicitario: la diferencia es de peso, no de privacidad. La web nueva solo carga sus archivos, las tipografías y, al llegar abajo, el mapa.</p>
+  </div>
+</section>
+
+<section id="cambios">
+  <div class="wrap">
+    <p class="label">Punto por punto</p>
+    <h2>Qué <em>cambia</em></h2>
+    <div class="list">
+      <article class="item"><h3>Pedir presupuesto</h3><p class="now"><small>Ahora</small>No hay formulario. El correo y el teléfono están en el pie.</p><p class="then"><small>Propuesta</small>Formulario con material, diámetro, cantidad y el plano adjunto.</p></article>
+      <article class="item"><h3>Llamar desde el móvil</h3><p class="now"><small>Ahora</small>El teléfono es texto: hay que copiarlo y marcarlo.</p><p class="then"><small>Propuesta</small>Se pulsa y llama, y hay un botón «Llamar» fijo al bajar.</p></article>
+      <article class="item"><h3>El correo</h3><p class="now"><small>Ahora</small>El enlace lleva un espacio de más («mailto: mecanizados…») y en algunos programas de correo no se abre bien.</p><p class="then"><small>Propuesta</small>Enlace correcto, y además el formulario.</p></article>
+      <article class="item"><h3>Capacidad de las máquinas</h3><p class="now"><small>Ahora</small>Los Ø16 a Ø80 mm están dentro de una subpágina de «Decoletaje».</p><p class="then"><small>Propuesta</small>En la portada, en las fichas de servicio y en el comprobador «¿Cabe en nuestros tornos?».</p></article>
+      <article class="item"><h3>Materiales</h3><p class="now"><small>Ahora</small>Dos entradas de menú llamadas «Materiales» (en Decoletaje y en Mecanizado), cada una con una lista distinta.</p><p class="then"><small>Propuesta</small>Una sola sección, con filtro de mecanizado y soldadura.</p></article>
+      <article class="item"><h3>Google</h3><p class="now"><small>Ahora</small>Sin descripción y sin titular principal. El título es una frase de 173 caracteres que Google corta.</p><p class="then"><small>Propuesta</small>Título y descripción escritos para quien busca decoletaje y mecanizado en Valencia, con Alaquàs y Els Mollons.</p></article>
+      <article class="item"><h3>Accesibilidad</h3><p class="now"><small>Ahora</small>No se puede ampliar en el móvil y 19 de 20 imágenes no tienen descripción.</p><p class="then"><small>Propuesta</small>Zoom libre, todas las imágenes descritas y se puede usar con teclado.</p></article>
+      <article class="item"><h3>Pequeños detalles</h3><p class="now"><small>Ahora</small>«Derrechos» en el pie, y «Empresa» en el menú no lleva a ninguna página.</p><p class="then"><small>Propuesta</small>Textos revisados y cada enlace lleva a su sitio.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="next">
+  <div class="wrap">
+    <p class="label">Para publicarla</p>
+    <h2>Lo que <em>haría falta</em></h2>
+    <ul class="todo">
+      <li><b>Fotos en alta resolución</b>Las de la web actual son pequeñas (360 px). Con los originales de esas fotos, y unas cuantas del taller y las máquinas, queda redonda.</li>
+      <li><b>Confirmar datos</b>Número de tornos (los directorios dicen 19), capacidades del CNC, horario, y si la dirección buena es Tapissers 32-34 o Coeters 24.</li>
+      <li><b>A dónde llegan las peticiones</b>Al correo de siempre, con el plano adjunto. Se configura en un momento.</li>
+      <li><b>Dominio y textos legales</b>Seguir con sebastianirigaray.es y añadir aviso legal, privacidad y cookies con vuestros datos.</li>
+    </ul>
+    <div class="close">
+      <div>
+        <h3>¿Os <em>gusta?</em></h3>
+        <p>Respondednos al correo y la dejamos lista con vuestras fotos, vuestros datos y vuestro dominio. Si queréis cambiar cualquier cosa, también.</p>
+      </div>
+      <div class="acts"><a class="btn red" href="demo/">Volver a la demo</a></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Propuesta preparada por MesaWeb Studio para Sebastián Irigaray S.L., C/ Tapissers 32-34, Alaquàs.</p>
+    <p>Fotos y datos: vuestra web actual. El plano de la portada es de ejemplo.</p>
+  </div>
+</footer>
+
+<script defer>
+(function () {
+  try {
+    var els = document.querySelectorAll('.rv');
+    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (en) {
+      en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } });
+    }, { threshold: 0.05, rootMargin: '0px 0px -6% 0px' });
+    els.forEach(function (e) { io.observe(e); });
+    setTimeout(function () { els.forEach(function (e) { e.classList.add('in'); }); }, 4000);
+  } catch (e) { document.querySelectorAll('.rv').forEach(function (x) { x.classList.add('in'); }); }
+})();
+</script>
+</body>
+</html>
